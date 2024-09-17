@@ -66,4 +66,12 @@ async function updateById(id, newData) {
   return postUpdated;
 }
 
-module.exports = { create, getAll, deleteById, updateById };
+async function getById(id) {
+  const post = await await Post.findById(id).populate("user");
+  if (!post) {
+    throw createError(404, "Post not found");
+  }
+  return post;
+}
+
+module.exports = { create, getAll, deleteById, updateById, getById };

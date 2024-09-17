@@ -82,4 +82,23 @@ router.patch("/:id", auth, async (request, response) => {
   }
 });
 
+router.get("/:id", async (request, response) => {
+  try {
+    const id = request.params.id;
+    const post = await PostsUsecases.getById(id);
+
+    response.json({
+      success: true,
+      message: "Post returned",
+      data: { post },
+    });
+  } catch (error) {
+    response.status(error.status || 500);
+    response.json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
 module.exports = router;

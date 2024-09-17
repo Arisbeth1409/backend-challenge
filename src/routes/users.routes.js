@@ -31,7 +31,7 @@ router.post("/auth/login", async (request, response) => {
     response.json({
       success: true,
       message: "You have logged in",
-      data: { token },
+      data: { token: token.token, user: token.user },
     });
   } catch (error) {
     response.status(error.status || 500);
